@@ -22,11 +22,21 @@ class UserViewSet(viewsets.ViewSet):
     @permission_classes([AllowAny]) 
     def login(self, request):
         data = request.data
-        result = UserService.authenticate_user(
+        auth_data = UserService.authenticate_user(
             username=data.get('username'),
             password=data.get('password')
         )
-        return Response(result, status=status.HTTP_200_OK)
+        response = Response(auth_data, status=status.HTTP_200_OK)
+        response.set_cookie(
+                    key='access_token',
+                    value=auth_data["access"],
+                    httponly=True,
+                    secure=False,
+                    samesite='Lax',
+                    max_age=60*15  
+                )
+
+        return response
 
     @action(detail=False, methods=['get'])
     @permission_classes([IsAuthenticated])

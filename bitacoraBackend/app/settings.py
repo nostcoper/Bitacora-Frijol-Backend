@@ -107,13 +107,14 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
+        'users.middlewares.CookieJWTAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
     ],
 }
-
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
@@ -122,6 +123,7 @@ SIMPLE_JWT = {
 }
 
 AUTH_USER_MODEL = 'users.user'
+AUTH_COOKIE_NAME = 'access_token'
 APPEND_SLASH = True
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
