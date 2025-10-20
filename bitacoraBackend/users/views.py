@@ -14,7 +14,10 @@ class UserViewSet(viewsets.ViewSet):
         user = UserService.register_user(
             username=data.get('username'),
             email=data.get('email'),
-            password=data.get('password')
+            password=data.get('password'),
+            first_name=data.get('first_name'),
+            last_name=data.get('last_name'),
+            points=data.get('points')
         )
         return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
 
