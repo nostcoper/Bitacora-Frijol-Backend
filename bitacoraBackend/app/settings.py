@@ -83,9 +83,9 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': config('ENGINE'),
-        'NAME': config('NAME'),
-        'USER': config('USER'),
+        'ENGINE': config('ENGINE', default='django.db.backends.mysql'),
+        'NAME': config('NAME', default='bitacora_db'),
+        'USER': config('USER', default='root'),
         'PASSWORD': config('PASSWORD', default=''),
         'HOST': config('HOST', default='127.0.0.1'),
         'PORT': config('PORT', default='3306'),
