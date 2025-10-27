@@ -84,13 +84,14 @@ WSGI_APPLICATION = 'app.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': config('ENGINE', default='django.db.backends.mysql'),
-        'NAME': config('NAME', default='bitacora_db'),
-        'USER': config('USER', default='root'),
-        'PASSWORD': config('PASSWORD', default=''),
-        'HOST': config('HOST', default='127.0.0.1'),
-        'PORT': config('PORT', default='3306'),
+        'NAME': config('DB_NAME', default='bitacora_db'),
+        'USER': config('DB_USER', default='bitacora'),
+        'PASSWORD': config('DB_PASSWORD', default='1234'),
+        'HOST': config('DB_HOST', default='127.0.0.1'),
+        'PORT': config('DB_PORT', default='3306'),
     }
 }
+
 
 
 
