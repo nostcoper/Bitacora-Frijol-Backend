@@ -89,12 +89,15 @@ CREATE TABLE IF NOT EXISTS `entry_image` (
   CONSTRAINT `fk_entry_image_entry` FOREIGN KEY (`entry_id`) REFERENCES `entry` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+DELIMITER //
+
 CREATE TRIGGER trg_user_before_insert
 BEFORE INSERT ON `user`
 FOR EACH ROW
 BEGIN
   SET NEW.updated_at = NOW();
 END;
+//
 
 CREATE TRIGGER trg_user_before_update
 BEFORE UPDATE ON `user`
@@ -102,6 +105,7 @@ FOR EACH ROW
 BEGIN
   SET NEW.updated_at = NOW();
 END;
+//
 
 CREATE TRIGGER trg_achievement_before_insert
 BEFORE INSERT ON `achievement`
@@ -110,6 +114,7 @@ BEGIN
   SET NEW.created_at = NOW();
   SET NEW.updated_at = NOW();
 END;
+//
 
 CREATE TRIGGER trg_achievement_before_update
 BEFORE UPDATE ON `achievement`
@@ -117,6 +122,7 @@ FOR EACH ROW
 BEGIN
   SET NEW.updated_at = NOW();
 END;
+//
 
 CREATE TRIGGER trg_mission_before_insert
 BEFORE INSERT ON `mission`
@@ -125,6 +131,7 @@ BEGIN
   SET NEW.created_at = NOW();
   SET NEW.updated_at = NOW();
 END;
+//
 
 CREATE TRIGGER trg_mission_before_update
 BEFORE UPDATE ON `mission`
@@ -132,6 +139,7 @@ FOR EACH ROW
 BEGIN
   SET NEW.updated_at = NOW();
 END;
+//
 
 CREATE TRIGGER trg_plant_before_insert
 BEFORE INSERT ON `plant`
@@ -140,6 +148,7 @@ BEGIN
   SET NEW.created_at = NOW();
   SET NEW.updated_at = NOW();
 END;
+//
 
 CREATE TRIGGER trg_plant_before_update
 BEFORE UPDATE ON `plant`
@@ -147,6 +156,7 @@ FOR EACH ROW
 BEGIN
   SET NEW.updated_at = NOW();
 END;
+//
 
 CREATE TRIGGER trg_user_mission_before_insert
 BEFORE INSERT ON `user_mission`
@@ -154,6 +164,7 @@ FOR EACH ROW
 BEGIN
   SET NEW.created_at = NOW();
 END;
+//
 
 CREATE TRIGGER trg_plant_achievement_before_insert
 BEFORE INSERT ON `plant_achievement`
@@ -161,6 +172,7 @@ FOR EACH ROW
 BEGIN
   SET NEW.awarded_at = NOW();
 END;
+//
 
 CREATE TRIGGER trg_user_achievement_before_insert
 BEFORE INSERT ON `user_achievement`
@@ -168,3 +180,6 @@ FOR EACH ROW
 BEGIN
   SET NEW.awarded_at = NOW();
 END;
+//
+
+DELIMITER ;
