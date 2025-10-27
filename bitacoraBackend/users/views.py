@@ -46,3 +46,11 @@ class UserViewSet(viewsets.ViewSet):
     def profile(self, request):
         user = request.user
         return Response(UserSerializer(user).data, status=status.HTTP_200_OK)
+    
+    @action(detail=False, methods=['patch'])
+    @permission_classes([IsAuthenticated])
+    def update_profile(self, request):
+        user = request.user
+        updated_user = UserService.update_user(user_id=user.id, data=request.data)
+        serializer = UserSerializer(updated_user)
+        return Response(serializer.data, status=status.HTTP_200_OK)

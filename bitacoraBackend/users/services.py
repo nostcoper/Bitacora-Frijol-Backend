@@ -52,3 +52,16 @@ class UserService:
             return User.objects.get(id=user_id)
         except User.DoesNotExist:
             raise ValidationError("Usuario no encontrado.")
+
+    @staticmethod
+    def update_user(user_id: int, data:dict):
+        try:
+            user = User.objects.get(id=user_id)
+            for field, value  in data.items():
+                if hasattr(user, field):
+                    setattr(user, field, value)
+            user.save()
+            return user
+        
+        except User.DoesNotExist:
+            raise ValidationError("Usuario no encontrado.")
